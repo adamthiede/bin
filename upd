@@ -1,0 +1,3 @@
+#doas mount -a
+doas apk upgrade -Uaiv
+[[ $(command -v flatpak) ]] && doas flatpak update

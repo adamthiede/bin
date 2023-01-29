@@ -1,0 +1,1 @@
+reader -i ${1} | less -n -R

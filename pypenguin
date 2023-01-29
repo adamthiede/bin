@@ -1,0 +1,15 @@
+#!/usr/bin/python
+from random import shuffle
+from os import system, listdir
+from os.path import isfile, join
+
+program="imv"
+path="/home/adam/Pictures/Penguins"
+
+pics = [f for f in listdir(path) if isfile(join(path, f))]
+shuffle(pics)
+penguin=pics[0]
+print(penguin)
+cmdline=f"{program} {path}/{penguin}&sleep 10 && pkill {program}"
+system(cmdline)
+

@@ -1,0 +1,12 @@
+#!/bin/bash
+BOX_NAME='alpine'
+if [[ $DISTROBOX_ENTER_PATH || $TOOLBOX_PATH ]];then
+	hare $@
+elif [[ $(command -v distrobox-enter) ]];then
+	distrobox-enter $BOX_NAME -- hare $@
+elif [[ $(command -v toolbox) ]];then
+	toolbox run hare $@
+else
+	echo "no distrobox or toolbox."
+fi
+

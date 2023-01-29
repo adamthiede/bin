@@ -1,0 +1,7 @@
+#!/bin/bash
+if [[ $(nmcli networking connectivity) == "full" ]];then
+	echo "$(date) syncing email."
+	mbsync -c ~/.config/mbsyncrc -a 2>&1
+else
+	echo "no networking; not syncing email."
+fi

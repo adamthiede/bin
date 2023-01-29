@@ -1,0 +1,5 @@
+# replace home with other stuff if you want
+# proxy over port 1989
+# set up foxyproxy to use localhost:1989
+sudo wg-quick up home
+ssh -D 1989 10.6.0.1

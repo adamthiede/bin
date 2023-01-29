@@ -1,0 +1,1 @@
+picocom --baud 115200 --parity n --databits 8 /dev/ttyUSB0

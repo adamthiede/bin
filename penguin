@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+#this program shows you a picture of a penguin in 
+
+wherethepenguinsat="$HOME/Pictures/Penguins/"
+penguinlooker="imv"
+delay=5
+
+penguin=$(find $wherethepenguinsat -type f|sort -R|head -n1)
+$penguinlooker $penguin & sleep ${delay}s && pkill $penguinlooker

@@ -1,0 +1,29 @@
+#!/bin/bash
+SEP="|"
+VOL=$(
+	SINK=$(pactl get-default-sink)
+	if [[ "$(pactl get-sink-mute "${SINK}"|grep 'yes')" ]];then
+		printf "🔇"
+	else
+		echo -n "🔈 $(pactl get-sink-volume "${SINK}"|head -n1|awk '{print $5}')"
+	fi
+)
+NET=$(
+	if [[ $(nmcli networking connectivity) == 'full' ]];then
+		printf "📡";
+	else
+		printf "🚫";
+	fi
+)
+PWR=$(
+	if [[ $(cat /sys/class/power_supply/ADP1/online) == '1' ]];then
+		printf '🔌';
+	else
+		printf '🔋';
+	fi;
+	cat /sys/class/power_supply/BAT0/capacity;
+)
+DATE=$(date +"%Y-%m-%d %H:%M")
+
+echo -e -n "$VOL $SEP $NET $SEP $PWR $SEP $DATE"
+

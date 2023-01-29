@@ -1,0 +1,4 @@
+echo -e "stuff ^H" # actually type ctrl+v ctrl+h for control char
+or
+for i in {1..10}; do printf "%02d blabla\r" $i; sleep 1;done
+or use \r as a line feed to wrap around, echo -e "stuff\r"

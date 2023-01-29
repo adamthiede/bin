@@ -1,0 +1,7 @@
+#!/bin/bash
+declare -i DELAY=${1}
+while [ $DELAY -ge 0 ];do
+    echo -en "Sleeping $DELAY minutes...\r"
+    sleep 1m
+    DELAY=$DELAY-1
+done

@@ -1,0 +1,51 @@
+#!/bin/bash
+
+create() {
+    echo "Enter a name for the container file"
+	read containerFile
+	echo "Enter a size in MB for the container file:"
+	read containerSize
+	echo "Creating the container file..."
+	dd if=/dev/zero of=${containerFile} bs=1M count=${containerSize}
+	echo "LUKS setup..."
+	cryptsetup luksFormat $containerFile
+	echo "Enter the password you just created..."
+	cryptsetup luksOpen $containerFile crypt1
+	echo "Formating the container file..."
+	mkfs.ext4 -j /dev/mapper/crypt1
+	mount /dev/mapper/crypt1 /mnt/
+	echo "Done! $containerFile is mounted at /mnt/"
+}
+open() {
+	echo "Enter file name of container to open"
+	read containerFile
+	if [ -e $containerFile ];then
+		cryptsetup luksOpen $containerFile crypt1
+		echo "Mounting the file.."
+		mount /dev/mapper/crypt1 /mnt/
+		echo "Container $containerFile is mounted at /mnt/"	
+	else
+		echo "$containerFile does not exist!"
+	fi
+}
+close() {
+	echo "Unmounting.."
+	umount /dev/mapper/crypt1
+	echo "Closing container.."
+	sudo cryptsetup luksClose crypt1
+	echo "Done!"
+}
+
+case $1 in 
+	"create")
+		create
+		;;
+	"open")
+		open
+		;;
+	"close")
+		close
+		;;
+	*)
+		echo "Usage: lukscontainer <create/open/close>"
+esac

@@ -1,0 +1,52 @@
+#!/usr/bin/env bash
+release=""
+if [ -n "$(grep PRETTY_NAME /etc/os-release)" ];then
+	release=$(sed  -n -e '/PRETTY_NAME/p' /etc/os-release |cut -d '"' -f 2)
+else
+	release=$(sed  -n -e '/NAME/p' /etc/os-release |cut -d '"' -f 2)
+fi
+
+# Colors
+NC='\033[0m'
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+ORANGE='\033[0;33m'
+BLUE='\033[0;34m'
+PURPLE='\033[0;35m'
+CYAN='\033[0;36m'
+LIGHTGRAY='\033[0;37m'
+DARKGRAY='\033[1;30m'
+LIGHTRED='\033[1;31m'
+LIGHTGREEN='\033[1;32m'
+YELLOW='\033[1;33m'
+LIGHTBLUE='\033[1;34m'
+LIGHTPURPLE='\033[1;35m'
+LIGHTCYAN='\033[1;36m'
+WHITE='\033[1;37m'
+
+CPUS=$(grep "model name" /proc/cpuinfo|wc -l)
+CPU=$(grep "model name" /proc/cpuinfo -m1|awk -F': ' '{print $2}')
+MEM=$(free|grep Mem:|awk '{print $2}')
+MEM=$(($MEM / 1024))
+MEMU=$(free|grep Mem:|awk '{print $3}')
+MEMU=$(($MEMU / 1024))
+PCT=$(echo "printf '%.2f', $MEMU/$MEM"|perl)
+PCT=$(echo "printf $PCT*100"|perl)
+#PIP=$(curl -s ipinfo.io|jq -r .ip)
+#IIP=$(hostname -i)
+
+echo -e "${PURPLE}OS release:${NC} $release"
+echo -e "${YELLOW}Kernel:${NC} $(uname -r)"
+echo -e "${RED}Shell:${NC} $SHELL"
+echo -e "${BLUE}Proc:${NC} $CPU (x${CPUS})"
+echo -e "${GREEN}Mem:${NC} $MEMU MB used of $MEM MB ($PCT%)"
+if [ -n "$XDG_SESSION_DESKTOP" ];then
+	echo -e "${CYAN}DE:${NC} $XDG_SESSION_DESKTOP"
+fi
+if [ -n "$PIP" ];then
+	echo -e "${LIGHTGREEN}Public IP:${NC} $PIP"
+fi
+if [ -n "$IIP" ];then
+	echo -e "${LIGHTGREEN}Internal IP:${NC} $IIP"
+fi
+echo "$(uptime -p)"
