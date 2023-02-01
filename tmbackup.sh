@@ -13,6 +13,7 @@ timemachine "$srcdir" $server:"$destdir" -- \
 --exclude vm \
 --exclude Music \
 --exclude Videos \
+--exclude .cache \
 --exclude .local/var/pmbootstrap \
 --exclude .local/share/containers
 
