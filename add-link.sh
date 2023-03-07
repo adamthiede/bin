@@ -21,7 +21,7 @@ lname=$1
 [ $download == "1" ] && lname=$2
 
 placeContent(){
-	fname=$(echo $pagetitle|md5sum --text -|awk '{print $1}')
+	fname="$(echo $pagetitle|md5sum --text -|awk '{print $1}').html"
 	#content=$(wget $lname -q -O -)
 	content=$(curl -q $lname)
 	echo "$content" >> "${dir}/${fname}"
