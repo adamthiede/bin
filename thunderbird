@@ -1,1 +1,2 @@
-TZ="US/Central" /var/lib/flatpak/app/org.mozilla.Thunderbird/current/active/export/bin/org.mozilla.Thunderbird $@
+#!/bin/sh
+flatpak run org.mozilla.Thunderbird $@

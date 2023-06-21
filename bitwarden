@@ -1,0 +1,2 @@
+#!/bin/bash
+flatpak run com.bitwarden.desktop --use-gl=egl --enable-features=UseOzonePlatform --ozone-platform=wayland $@

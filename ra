@@ -1,0 +1,12 @@
+#!/bin/bash
+BOX_NAME='alpine'
+if [[ $DISTROBOX_ENTER_PATH || $TOOLBOX_PATH ]];then
+	rust-analyzer $@
+elif [[ $(command -v distrobox-enter) ]];then
+	distrobox-enter $BOX_NAME -- rust-analyzer $@
+elif [[ $(command -v toolbox) ]];then
+	toolbox run rust-analyzer $@
+else
+	echo "no distrobox or toolbox."
+fi
+

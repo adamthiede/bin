@@ -20,18 +20,16 @@ echo $scheme
 setlight() {
 	gsettings set org.gnome.desktop.interface gtk-theme $lt
 	gsettings set org.gnome.desktop.interface color-scheme default
-	sed -i -e 's/^theme=default/theme=papercolor-light/' $HOME/.config/tut/config.ini
 	sed -i -e 's/*gdark/*glight/' $HOME/.config/alacritty/alacritty.yml
-	sed -i -e 's/^set background=dark/set background=light/' $HOME/.vimrc
-	#sed -i -e 's/gtk-application-prefer-dark-theme = 1/gtk-application-prefer-dark-theme = 0/' $HOME/.config/gtk-3.0/settings.ini
+	#sed -i -e 's/^set background=dark/set background=light/' $HOME/.vimrc
+	#sed -i -e "s/^set.background='dark'/set.background='light'/" $HOME/.config/nvim/init.lua
 }
 setdark() {
 	gsettings set org.gnome.desktop.interface gtk-theme $dt
 	gsettings set org.gnome.desktop.interface color-scheme prefer-dark
-	sed -i -e 's/^theme=papercolor-light/theme=default/' $HOME/.config/tut/config.ini
 	sed -i -e 's/*glight/*gdark/' $HOME/.config/alacritty/alacritty.yml
-	sed -i -e 's/^set background=light/set background=dark/' $HOME/.vimrc
-	#sed -i -e 's/gtk-application-prefer-dark-theme = 0/gtk-application-prefer-dark-theme = 1/' $HOME/.config/gtk-3.0/settings.ini
+	#sed -i -e 's/^set background=light/set background=dark/' $HOME/.vimrc
+	#sed -i -e "s/^set.background='light'/set.background='dark'/" $HOME/.config/nvim/init.lua
 }
 swap(){
     if [ $scheme == "'default'" ];then

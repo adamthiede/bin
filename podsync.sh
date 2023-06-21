@@ -1,6 +1,6 @@
 #!/bin/bash
 #clean out the empty dirs
-find ~/.local/share/newsboat/Podcasts/ -type d -empty -exec rmdir {} \;
+find ~/.local/share/newsboat/Podcasts/ -type d -empty -delete
 #renaming no longer needed.
 #for dir in ~/.config/newsboat/Podcasts/* ; do
 #	cd "$dir"

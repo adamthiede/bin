@@ -1,0 +1,2 @@
+#!/bin/bash
+flatpak run md.obsidian.Obsidian --use-gl=egl --enable-features=UseOzonePlatform --ozone-platform=wayland $@

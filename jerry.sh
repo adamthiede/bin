@@ -1,0 +1,1 @@
+/home/adam/repos/jerry/jerry.sh

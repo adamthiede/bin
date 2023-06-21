@@ -1,7 +1,8 @@
 #!/bin/sh
-server="mini"
+server="nas"
 srcdir="/home/adam/"
-destdir="/mnt/data/adam_bkup/"
+[ -d /var/home/adam ] && srcdir="/var/home/adam/"
+destdir="/volume1/Adam/timemachine/"
 ssh $server hostname
 if [[ ! $? -eq 0 ]];then
 	echo "Cannot find backup server $server."

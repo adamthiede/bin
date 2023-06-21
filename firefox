@@ -1,2 +1,3 @@
 #!/bin/sh
-TZ="US/Central" /var/lib/flatpak/app/org.mozilla.firefox/current/active/export/bin/org.mozilla.firefox $@
+/var/lib/flatpak/app/org.mozilla.firefox/current/active/export/bin/org.mozilla.firefox $@
+#firefox-esr $@

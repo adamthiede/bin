@@ -1,3 +1,7 @@
-#doas mount -a
-doas apk upgrade -Uaiv
-[[ $(command -v flatpak) ]] && doas flatpak update
+#!/bin/sh
+[[ $(command -v doas) ]] && su=doas || su=sudo
+[[ $(command -v apk) ]] && $su apk upgrade -Uaiv
+[[ $(command -v dnf) ]] && $su microdnf upgrade
+[[ $(command -v apt) ]] && $su apt update && sudo apt upgrade
+[[ $(command -v flatpak) ]] && $su flatpak update
+[[ $(command -v rpm-ostree) ]] && $su rpm-ostree upgrade
